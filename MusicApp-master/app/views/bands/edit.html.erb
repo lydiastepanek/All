@@ -1,0 +1,17 @@
+<h1> EDIT BAND </h1>
+
+<%= @band.errors.full_messages %>
+
+<form action="<%= band_url(@band.id) %>" method="POST">
+  <input type="hidden" name="_method" value="PUT">
+
+  <input type="hidden"
+          name="authenticity_token"
+          value="<%= form_authenticity_token %>">
+
+  <label for="band_name">Band Name</label>
+  <input type="text" name="band[band_name]" id="band_name" value="<%= @band.band_name %>">
+
+  <input type="submit" value="Submit">
+
+</form>

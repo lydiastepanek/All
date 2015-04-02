@@ -1,0 +1,37 @@
+<h1> EDIT TRACK </h1>
+
+<%= @track.errors.full_messages %>
+
+<form action="<%= track_url(@track.id) %>" method="POST">
+  <input type="hidden" name="_method" value="PUT">
+
+  <input type="hidden"
+          name="authenticity_token"
+          value="<%= form_authenticity_token %>">
+
+  <label for="track_name">Track Name</label>
+  <input type="text" name="track[track_name]" id="track_name" value="<%= @track.track_name %>">
+  </br>
+
+  <!-- <label for="track_type">Track Type</label>
+  <input type="text" name="track[track_type]" id="track_type" value="<%= @track.track_type %>">
+  </br> -->
+
+  <% Track::TRACKTYPES.each do |tp| %>
+  <label for="track_type">
+      <input  type="radio"
+              name="track[track_type]"
+              value="<%= tp %>"
+              <%= "checked" if @track.track_type == tp %>>
+      <%= tp.capitalize %>
+    </label>
+  <% end %>
+  </br>
+
+  <label for="lyrics">Lyrics</label>
+  <textarea name="track[lyrics]" id="lyrics"><%= @track.lyrics %></textarea>
+  </br>
+
+  <input type="submit" value="Submit">
+
+</form>

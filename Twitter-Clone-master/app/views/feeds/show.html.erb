@@ -1,0 +1,41 @@
+<h1>Welcome <%= current_user.username %>!</h1>
+
+<b>Your Feed!</b>
+
+<section class="infinite-tweets">
+  <ul id="feed">
+
+
+  </ul>
+  <a href="javascript:void(0)" class="fetch-more-tweets">Fetch more tweets</a>
+</section>
+
+<%= render "tweets/form" %>
+
+<script>
+
+
+
+  $.InfiniteTweets = function (el) {
+    this.$el = $(el);
+    this.$feed = this.$el.find("ul");
+
+  };
+
+  $.InfiniteTweets.prototype.fetchTweets = function () {
+
+  };
+
+  $.fn.infiniteTweets = function () {
+    return this.each(function () {
+      new $.InfiniteTweets(this);
+    });
+  };
+
+  $(function () {
+    $(".infinite-tweets").infiniteTweets();
+  });
+
+
+
+</script>

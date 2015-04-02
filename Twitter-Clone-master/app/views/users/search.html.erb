@@ -1,0 +1,112 @@
+<h1>Search!</h1>
+
+<form class="users-search" action="/users/search" method="GET">
+  <input
+    type="text"
+    name="query"
+    value="<%= @query %>">
+
+<ul class="users">
+  <% @users.each do |user| %>
+    <li>
+      <%= link_to user.username, user_url(user) %>
+      <%= render "follows/form", user: user %>
+    </li>
+  <% end %>
+</ul>
+
+</form>
+
+<script>
+
+  $.FollowToggle = function (el) {
+    this.$el         = $(el);
+    this.userId      = this.$el.data("user-id");
+    this.followState = this.$el.data("initial-follow-state");
+
+    this.render();
+    this.$el.on("click", this.handleClick.bind(this));
+  };
+
+  $.FollowToggle.prototype.render = function () {
+    // ...
+    if (this.followState === "followed") {
+      this.$el.text("Unfollow!");
+    } else {
+      this.$el.text("Follow!");
+    }
+  };
+
+  $.FollowToggle.prototype.handleClick = function (event) {
+    var url = "/users/" + this.userId + "/follow";
+    var type = this.followState === "followed" ? "DELETE" : "POST";
+    this.$el.prop("disabled", true);
+    event.preventDefault();
+    $.ajax({
+      url: url,
+      type: type,
+      dataType: "json",
+      success: function () {
+        this.followState = this.followState === "followed" ? "unfollowed" : "followed" ;
+        this.render();
+        this.$el.prop("disabled", false);
+      }.bind(this)
+    });
+  };
+
+  $.fn.followToggle = function () {
+    return this.each(function () {
+      new $.FollowToggle(this);
+    });
+  };
+
+  $.UsersSearch = function (el) {
+    this.$el    = $(el);
+    this.$input = this.$el.find("input:nth-child(1)");
+    this.$users = this.$el.find(".users");
+    this.$input.on("input", this.handleInput.bind(this));
+  };
+
+  $.UsersSearch.prototype.handleInput = function (event) {
+    event.preventDefault();
+    var url  = "/users/search";
+    var type = "GET";
+
+    $.ajax({
+      url: url,
+      type: type,
+      dataType: "json",
+      data: {query: this.$input.val()},
+      success: function (data) {
+        this.render(data);
+      }.bind(this)
+    });
+  };
+
+  $.UsersSearch.prototype.render = function(users) {
+    this.$users.children().remove();
+    users.forEach(function(user) {
+      var liTemplate = _.template('<li><a href="/users/<%%= id %>"><%%= username %></a>' +
+          '  <button class="follow-toggle" data-user-id=<%%= id %> data-initial-follow-state=<%%= followed %>></button></li>');
+      user.followed = user.followed ? "followed" : "unfollowed";
+      var li = $(liTemplate(user));
+      this.$users.append(li);
+    }.bind(this));
+    this.$users.find("button").followToggle();
+  };
+
+  $.fn.usersSearch = function () {
+    return this.each(function () {
+      new $.UsersSearch(this);
+    });
+  };
+
+  $(function () {
+    $(".users-search").usersSearch();
+  });
+
+  $(function () {
+    $("button.follow-toggle").followToggle();
+  });
+
+</script>

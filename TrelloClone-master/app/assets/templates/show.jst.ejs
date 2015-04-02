@@ -1,0 +1,24 @@
+<h1><%= board.escape('title') %> </h1>
+
+<ul>Lists:
+  <% board.lists().each(function (list) { %>
+    <li> <%= list.escape('title') %>
+    <button class="add-card">Add Card</button>
+    <ul>
+      <% list.cards().each(function (card) { %>
+        <li><%= card.escape('title') %><br>
+          <%= card.escape('description') %></li>
+        <button class="delete-card">Delete Card</button>
+      <% }) %>
+    </ul>
+  <% }) %></li>
+</ul>
+
+<form>
+  <label for="new-list">Create a New List</label><br>
+  <input id="new-list" type="text" name="board[list]" value=""><br>
+  <button class="new-list">Submit</button>
+
+</form>
+<br>
+<button class="delete-board">Delete Board</button>

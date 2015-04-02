@@ -1,0 +1,35 @@
+<%= @link.title %>
+
+<%= @link.url %>
+</br>
+
+<a href="<%= edit_link_url(@link.id) %>">Edit Link</a>
+</br>
+
+<a href="<%= links_url %>">Links</a>
+
+</br>
+</br>
+
+<h1>Comments</h1>
+
+<% @link.comments.each do |comment| %>
+
+<%= comment.comment %>
+
+<%= button_to "Remove Comment", comment_url(comment), method: :delete %>
+
+<% end %>
+</br>
+
+<form action="<%= link_comments_url(@link) %>" method="post">
+  <%= auth_token %>
+  <%= flash[:errors] %>
+</br>
+
+  <label for="comment">Comment</label>
+    <input id="comment" type="text" name="comment[comment]">
+
+<button>Add Comment</button>
+
+</form>

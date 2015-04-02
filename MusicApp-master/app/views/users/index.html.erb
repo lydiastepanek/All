@@ -1,0 +1,11 @@
+<h1> ALL USERS </h1>
+
+<% User.all.each do |user| %>
+
+  <ul>
+    <li>
+      <p><a href=" <%= user_url(user.id) %> "> <%= user.email %> </a></p>
+    </li>
+  </ul>
+
+<% end %>

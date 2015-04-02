@@ -1,0 +1,17 @@
+<h1> New Link </h1>
+
+ <%=   @link.errors.full_messages %>
+
+<form action="<%= links_url %>" method="POST">
+  <%= auth_token %>
+
+  <label for="title">Title</label>
+    <input id="title" type="text" name="link[title]">
+
+  <label for="url">URL</label>
+    <input id="url" type="text" name="link[url]">
+
+
+<button>Create New Link</button>
+
+</form>

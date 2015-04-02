@@ -1,0 +1,28 @@
+<h1> EDIT ALBUM </h1>
+
+<%= @album.errors.full_messages %>
+
+<form action="<%= album_url(@album.id) %>" method="POST">
+  <input type="hidden" name="_method" value="PUT">
+
+  <input type="hidden"
+          name="authenticity_token"
+          value="<%= form_authenticity_token %>">
+
+  <label for="album_name">Album Name</label>
+  <input type="text" name="album[album_name]" id="album_name" value="<%= @album.album_name %>">
+  </br>
+
+  <label for="album_type">Album Type</label>
+  <select name="album[album_type]" id="album_type">
+    <% Album::ALBUMTYPES.each do |tp| %>
+      <option value="<%= tp %>"
+          <%= "selected" if @album.album_type == tp %>>
+        <%= tp.upcase %>
+      </option>
+    <% end %>
+  </select>
+
+  <input type="submit" value="Submit">
+
+</form>

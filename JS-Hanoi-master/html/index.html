@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Towers of Hanoi</title>
+    <link rel="stylesheet" type="text/css" href="../css/toh.css">
+  </head>
+
+  <body>
+
+    <script src="../js/jquery-2.1.1.js"></script>
+    <script src="../hanoi-core-solution/hanoi-core.js"></script>
+    <script src="../js/toh-view.js"></script>
+
+    <figure>
+
+      <section>
+
+        <ul>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+
+        <ul>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+
+        <ul>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+
+      </section>
+
+    </figure>
+
+    <script>
+      var game = new Game;
+      var view = new Hanoi.View(game, $("figure"));
+    </script>
+
+
+  </body>
+</html>

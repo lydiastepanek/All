@@ -1,0 +1,40 @@
+<h1> ALBUM </h1>
+
+<table>
+    <tr>
+        <td>Album Name</td>
+        <td>Destroy</td>
+        <td>Edit</td>
+        <td>All Albums</td>
+        <td>Album Band</td>
+        <td>All Album Tracks</td>
+    </tr>
+    <tr>
+        <td><%= @album.album_name%></td>
+
+        <td>
+          <form action="<%= album_url(@album.id) %>" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <input type="hidden"
+                    name="authenticity_token"
+                    value="<%= form_authenticity_token %>">
+            <input type="submit" value="Delete">
+          </form>
+        </td>
+
+        <td>
+          <p><a href=" <%= edit_album_url(@album) %> "> Edit Album </a></p>
+        </td>
+
+        <td>
+          <p><a href=" <%= albums_url %> "> All Albums </a></p>
+        </td>
+
+        <td><%= @album.band%></td>
+
+        <% @album.tracks.each do |track| %>
+        <td><%= track.track_name %></td>
+        <% end %>
+    </tr>
+
+</table>

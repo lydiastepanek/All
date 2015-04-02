@@ -1,0 +1,11 @@
+<h1> ALL TRACKS </h1>
+
+<% Track.all.each do |track| %>
+
+  <ul>
+    <li>
+      <p><a href=" <%= track_url(track.id) %> "> <%= track.track_name %> </a></p>
+    </li>
+  </ul>
+
+<% end %>

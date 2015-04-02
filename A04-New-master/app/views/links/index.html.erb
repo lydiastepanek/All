@@ -1,0 +1,10 @@
+<% Link.all.each do |link| %>
+
+<a href="<%= link_url(link.id)%>"><%= link.title %></a>
+
+<%= link.url %>
+</br>
+
+<% end %>
+
+<a href="<%= new_link_url %>">New Link</a>

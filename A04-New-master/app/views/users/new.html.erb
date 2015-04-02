@@ -1,0 +1,17 @@
+<h1> Sign Up </h1>
+
+ <%=   @user.errors.full_messages %>
+
+<form action="<%= users_url %>" method="POST">
+  <%= auth_token %>
+
+  <label for="username">Username</label>
+    <input id="username" type="text" name="user[username]">
+
+  <label for="password">Password</label>
+    <input id="password" type="text" name="user[password]">
+
+
+  <button>Sign Up</button>
+
+</form>

@@ -1,0 +1,12 @@
+<a href="<%= '#/boards/' + board.id %>">
+  <%= board.escape('title') %>
+</a>
+
+<ul>
+  <% board.lists().each(function (list) { %>
+    <%= list.escape('title') %><br>
+    <!-- <%= list.escape('created_at') %><br> -->
+  <% }) %>
+</ul>
+
+<br>
